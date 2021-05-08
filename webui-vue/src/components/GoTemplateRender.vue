@@ -109,7 +109,7 @@ export default {
           }
           return response.text();
         })
-        .then((data) => (this.renderData = data))
+        .then((data) => (this.renderData = data.replace('\n', '<br />')))
     },
   },
 };
