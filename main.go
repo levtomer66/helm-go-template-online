@@ -48,9 +48,11 @@ func executeSingleTemplate(values map[string]interface{}, tplString string, isSt
 	if err != nil {
 		return "", fmt.Errorf("Failed to parse standard input: %v", err)
 	}
-
+	retVal := strings.Replace(buf.String(), "<no value>", "", -1)
+	retVal = strings.ReplaceAll(retVal, "\\n", "<br />")
+	retVal = strings.ReplaceAll(retVal, "\"", "")
 	// Work around to remove the "<no value>" go templates add.
-	return strings.Replace(buf.String(), "<no value>", "", -1), nil
+	return retVal, nil
 }
 
 type TplRequest struct {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <GoTemplateRender msg="Welcome to Your Vue.js App"/>
+    <GoTemplateRender />
   </div>
 </template>
 

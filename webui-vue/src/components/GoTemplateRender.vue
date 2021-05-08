@@ -2,7 +2,7 @@
   <div id="app">
     <form class="container">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <h1>Template</h1>
           <PrismEditor
             class="my-editor"
@@ -12,15 +12,7 @@
             line-numbers
           ></PrismEditor>
         </div>
-        <div class="col-md-5">
-          <h1>Render</h1>
-          <div id="render">{{ renderData }}</div>
-        </div>
-        
-      </div>
-
-      <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <h1>Values (Yaml)</h1>
           <PrismEditor
             class="my-editor"
@@ -30,6 +22,15 @@
             line-numbers
           ></PrismEditor>
         </div>
+        
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Render</h1>
+          <div id="render" v-html="renderData">{{ renderData }}</div>
+        </div>
+        
         <div class="col-md-5 buttons">
             <input
               type="button"
@@ -109,7 +110,7 @@ export default {
           }
           return response.text();
         })
-        .then((data) => (this.renderData = data.replace('\n', '<br />')))
+        .then((data) => (this.renderData = data))
     },
   },
 };
@@ -142,8 +143,9 @@ textarea:focus-visible {
 #render,
 #values {
   width: 100%;
-  min-height: 385px;
+  min-height: 400px;
   white-space: pre;
+  text-align: start;
 }
 
 #render {
