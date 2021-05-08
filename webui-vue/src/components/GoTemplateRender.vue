@@ -143,6 +143,7 @@ textarea:focus-visible {
 #values {
   width: 100%;
   min-height: 385px;
+  white-space: pre;
 }
 
 #render {
