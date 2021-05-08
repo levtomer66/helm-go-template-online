@@ -75,6 +75,7 @@ func render(w http.ResponseWriter, req *http.Request) {
 	fmt.Println(tplreq.Values)
 	r, err := executeSingleTemplate(jsonMap, tplreq.Template, false)
 	if err != nil {
+		w.WriteHeader(500)
 		fmt.Fprintf(w, err.Error())
 	}
 	fmt.Fprintf(w, r)

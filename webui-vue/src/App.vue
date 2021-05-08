@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import GoTemplateRender from './components/GoTemplateRender.vue'
 
 export default {

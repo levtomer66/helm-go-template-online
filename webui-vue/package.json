@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "js-yaml": "^4.1.0",
+    "prismjs": "1.23.0",
+    "vue": "^2.6.11",
+    "vue-prism-editor": "^1.2.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

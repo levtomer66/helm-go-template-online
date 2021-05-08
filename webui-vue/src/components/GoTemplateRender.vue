@@ -4,7 +4,13 @@
       <div class="row">
         <div class="col-md-5">
           <h1>Template</h1>
-          <textarea v-model="templates" id="template"></textarea>
+          <PrismEditor
+            class="my-editor"
+            id="template"
+            v-model="template"
+            :highlight="highlighter"
+            line-numbers
+          ></PrismEditor>
         </div>
         <div class="col-md-5">
           <h1>Render</h1>
@@ -57,7 +63,13 @@
       <div class="row">
         <div class="col-md-5">
           <h1>Values</h1>
-          <textarea v-model="values" id="values"></textarea>
+          <PrismEditor
+            class="my-editor"
+            id="values"
+            v-model="values"
+            :highlight="highlighter"
+            line-numbers
+          ></PrismEditor>
         </div>
       </div>
     </form>
@@ -65,45 +77,95 @@
 </template>
 
 <script>
+import { PrismEditor } from "vue-prism-editor";
+import "vue-prism-editor/dist/prismeditor.min.css"; // import the styles somewhere
+
+// import highlighting library (you can use any library you want just return html string)
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import "prismjs/themes/prism-tomorrow.css"; // import syntax highlighting styles
+const yaml = require("js-yaml");
+
 export default {
   name: "GoTemplateRender",
+  components: {
+    PrismEditor,
+  },
   data() {
     return {
       values: "",
-      templates: "",
-      renderData: ""
+      template: "",
+      renderData: "",
     };
   },
   methods: {
+    highlighter(code) {
+      return highlight(code, languages.js); //returns html
+    },
+    yamlToJson() {
+      try {
+        const doc = yaml.load(this.values);
+        return doc;
+      } catch (e) {
+        return e;
+      }
+    },
+
     render() {
       console.log(this.values);
       console.log(this.template);
+      const myval = this.yamlToJson(this.values);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify ({
-                template: JSON.stringify(this.templates),
-                values: this.values,
-            })
+        body: JSON.stringify({
+          template: JSON.stringify(this.template),
+          values: JSON.stringify(myval),
+        }),
       };
       fetch("/render", requestOptions)
-        .then((response) => response.json())
-        .then((data) => (this.renderData = data));
+        .then((response) => {
+          if (!response.ok) {
+            return response.text()
+            // throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => (this.renderData = data))
     },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
+.prism-editor-wrapper {
+  height: auto;
+}
+/* required class */
+.my-editor {
+  /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
+  background: #4e4e4e;
+  color: #ccc;
+
+  /* you must provide font-family font-size line-height. Example: */
+  font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px;
+}
+
+/* optional class for removing the outline */
+textarea:focus-visible {
+  outline: none !important;
+}
+
 #template,
 #render,
 #values {
   width: 100%;
-  min-height: 300px;
-  resize: vertical;
-  font-family: "Courier New", Courier, monospace;
-  border: 1px solid #ccc;
+  min-height: 385px;
 }
 
 #render {
