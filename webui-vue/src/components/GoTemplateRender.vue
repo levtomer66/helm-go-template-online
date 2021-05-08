@@ -22,7 +22,10 @@
             line-numbers
           ></PrismEditor>
         </div>
-        
+        <div class="col-md-4">
+            <input type="checkbox" id="checkbox" v-model="helmEnabled" />
+            <label style="padding-left: 10px" for="checkbox">Enable Helm (makes .Values works)</label>
+        </div>
       </div>
 
       <div class="row">
@@ -30,21 +33,21 @@
           <h1>Render</h1>
           <div id="render" v-html="renderData">{{ renderData }}</div>
         </div>
-        
+
         <div class="col-md-5 buttons">
-            <input
-              type="button"
-              class="btn btn-success"
-              @click="render"
-              id="convert"
-              value="Convert"
-            />
-            <input
-              type="button"
-              class="btn btn-danger"
-              id="clear"
-              value="Clear"
-            />
+          <input
+            type="button"
+            class="btn btn-success"
+            @click="render"
+            id="convert"
+            value="Convert"
+          />
+          <input
+            type="button"
+            class="btn btn-danger"
+            id="clear"
+            value="Clear"
+          />
         </div>
       </div>
     </form>
@@ -72,15 +75,15 @@ export default {
       values: "myval: 5",
       template: "{{ .myval }}",
       renderData: "",
-      helmEnabled: true
+      helmEnabled: false,
     };
   },
   methods: {
     highlighterYml(code) {
-      return highlight(code, languages.yml, 'yaml'); //returns html
+      return highlight(code, languages.yml, "yaml"); //returns html
     },
     highlighterGo(code) {
-      return highlight(code, languages.yaml, 'yaml'); //returns html
+      return highlight(code, languages.yaml, "yaml"); //returns html
     },
     yamlToJson() {
       try {
@@ -96,7 +99,7 @@ export default {
       console.log(this.template);
       let myval = this.yamlToJson(this.values);
       if (this.helmEnabled) {
-        myval = { "Values" : myval }
+        myval = { Values: myval };
       }
       const requestOptions = {
         method: "POST",
@@ -109,12 +112,12 @@ export default {
       fetch("/render", requestOptions)
         .then((response) => {
           if (!response.ok) {
-            return response.text()
+            return response.text();
             // throw new Error("Network response was not ok");
           }
           return response.text();
         })
-        .then((data) => (this.renderData = data))
+        .then((data) => (this.renderData = data));
     },
   },
 };
