@@ -72,6 +72,7 @@ export default {
       values: "myval: 5",
       template: "{{ .myval }}",
       renderData: "",
+      helmEnabled: true
     };
   },
   methods: {
@@ -93,7 +94,10 @@ export default {
     render() {
       console.log(this.values);
       console.log(this.template);
-      const myval = this.yamlToJson(this.values);
+      let myval = this.yamlToJson(this.values);
+      if (this.helmEnabled) {
+        myval = { "Values" : myval }
+      }
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
