@@ -41,12 +41,12 @@ func executeSingleTemplate(values map[string]interface{}, tplString string, isSt
 
 	tpl, err := tpl.Parse(tplString)
 	if err != nil {
-		return "", fmt.Errorf("Error parsing template(s): %v", err)
+		return "", fmt.Errorf("error parsing template(s): %v", err)
 	}
 
 	err = tpl.Execute(buf, values)
 	if err != nil {
-		return "", fmt.Errorf("Failed to parse standard input: %v", err)
+		return "", fmt.Errorf("failed to parse standard input: %v", err)
 	}
 	retVal := strings.Replace(buf.String(), "<no value>", "", -1)
 	retVal = strings.ReplaceAll(retVal, "\\n", "<br />")
@@ -77,9 +77,9 @@ func render(w http.ResponseWriter, req *http.Request) {
 	r, err := executeSingleTemplate(jsonMap, tplreq.Template, false)
 	if err != nil {
 		w.WriteHeader(500)
-		fmt.Fprintf(w, err.Error())
+		fmt.Fprint(w, err.Error())
 	}
-	fmt.Fprintf(w, r)
+	fmt.Fprint(w, r)
 }
 
 func determineListenAddress() (string, error) {
