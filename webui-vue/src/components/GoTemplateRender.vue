@@ -8,7 +8,7 @@
             class="my-editor"
             id="template"
             v-model="template"
-            :highlight="highlighter"
+            :highlight="highlighterGo"
             line-numbers
           ></PrismEditor>
         </div>
@@ -16,33 +16,21 @@
           <h1>Render</h1>
           <div id="render">{{ renderData }}</div>
         </div>
-        <div class="col-md-2">
-          <h1>Settings</h1>
-          <div id="settings">
-            <label
-              ><input
-                type="checkbox"
-                name="showwhitespaces"
-                checked="checked"
-              />
-              Show whitespaces</label
-            ><br />
-            <label
-              ><input type="checkbox" name="dummyvalues" /> Use dummy
-              values</label
-            >
-            <label
-              ><input
-                type="radio"
-                name="input_type"
-                value="json"
-                checked="checked"
-              />
-              JSON</label
-            >
-            <label
-              ><input type="radio" name="input_type" value="yaml" /> YAML</label
-            >
+        
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <h1>Values (Yaml)</h1>
+          <PrismEditor
+            class="my-editor"
+            id="values"
+            v-model="values"
+            :highlight="highlighterYml"
+            line-numbers
+          ></PrismEditor>
+        </div>
+        <div class="col-md-5 buttons">
             <input
               type="button"
               class="btn btn-success"
@@ -56,20 +44,6 @@
               id="clear"
               value="Clear"
             />
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-5">
-          <h1>Values</h1>
-          <PrismEditor
-            class="my-editor"
-            id="values"
-            v-model="values"
-            :highlight="highlighter"
-            line-numbers
-          ></PrismEditor>
         </div>
       </div>
     </form>
@@ -82,9 +56,9 @@ import "vue-prism-editor/dist/prismeditor.min.css"; // import the styles somewhe
 
 // import highlighting library (you can use any library you want just return html string)
 import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism-tomorrow.css"; // import syntax highlighting styles
+// import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-yaml";
+// import "prismjs/themes/prism-tomorrow.css"; // import syntax highlighting styles
 const yaml = require("js-yaml");
 
 export default {
@@ -94,14 +68,17 @@ export default {
   },
   data() {
     return {
-      values: "",
-      template: "",
+      values: "myval: 5",
+      template: "{{ .myval }}",
       renderData: "",
     };
   },
   methods: {
-    highlighter(code) {
-      return highlight(code, languages.js); //returns html
+    highlighterYml(code) {
+      return highlight(code, languages.yml, 'yaml'); //returns html
+    },
+    highlighterGo(code) {
+      return highlight(code, languages.yaml, 'yaml'); //returns html
     },
     yamlToJson() {
       try {
@@ -178,5 +155,9 @@ span.whitespace {
 
 label {
   font-weight: normal;
+}
+
+.buttons {
+  margin-top: 100px;
 }
 </style>
