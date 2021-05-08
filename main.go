@@ -98,9 +98,9 @@ func main() {
 		fmt.Println(err)
 	}
 
-	err := http.ListenAndServe(addr, nil)
-	if err != nil {
-		fmt.Println(err)
+	errListen := http.ListenAndServe(addr, nil)
+	if errListen != nil {
+		fmt.Println(errListen)
 	}
 
 }
