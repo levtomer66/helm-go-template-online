@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"text/template"
 
@@ -79,12 +80,25 @@ func render(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, r)
 }
 
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
+}
+
 func main() {
 	fs := http.FileServer(http.Dir("./webui-vue/dist"))
 	http.Handle("/", fs)
 
 	http.HandleFunc("/render", render)
-	err := http.ListenAndServe(":3000", nil)
+	addr, err := determineListenAddress()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err := http.ListenAndServe(addr, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
