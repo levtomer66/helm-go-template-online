@@ -22,32 +22,51 @@
             line-numbers
           ></PrismEditor>
         </div>
-        <div class="col-md-4">
-            <input type="checkbox" id="checkbox" v-model="helmEnabled" />
-            <label style="padding-left: 10px" for="checkbox">Enable Helm (makes .Values works)</label>
-        </div>
       </div>
-
       <div class="row">
+        <div class="col-md-12 buttons">
+          <vs-switch 
+            val="I'm debugging Helm" 
+            v-model="helmEnabled"
+            primary
+            color="#7d33ff"
+          >
+            <template #circle>
+                <i v-if="!active5" class='bx bxs-moon' ></i>
+                <i v-else class='bx bxs-sun' ></i>
+            </template>
+            I'm debugging Helm
+          </vs-switch>
+          <vs-button
+            type="button"
+            gradient
+            size="xl"
+            color="danger"
+            @click="clear"
+          >
+            Clear
+          </vs-button>
+          <vs-button
+            type="button"
+            gradient
+            size="xl"
+            color="success"
+            @click="render"
+          >
+            Render
+          </vs-button>
+        </div>
         <div class="col-md-12">
           <h1>Render</h1>
-          <div id="render" v-html="renderData">{{ renderData }}</div>
-        </div>
-
-        <div class="col-md-5 buttons">
-          <input
-            type="button"
-            class="btn btn-success"
-            @click="render"
-            id="convert"
-            value="Convert"
-          />
-          <input
-            type="button"
-            class="btn btn-danger"
-            id="clear"
-            value="Clear"
-          />
+          <!-- <div id="render" v-html="renderData"> -->
+            <PrismEditor
+              class="my-editor"
+              id="render"
+              v-model="renderData"
+              :highlight="highlighterYml"
+              line-numbers
+            ></PrismEditor>
+          <!-- </div> -->
         </div>
       </div>
     </form>
@@ -119,29 +138,27 @@ export default {
         })
         .then((data) => (this.renderData = data));
     },
+    clear() {
+      this.renderData = "";
+    }
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
 .prism-editor-wrapper {
   height: auto;
 }
-/* required class */
-.my-editor {
-  /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
-  background: #4e4e4e;
-  color: #ccc;
 
-  /* you must provide font-family font-size line-height. Example: */
+.my-editor {
+  background: whitesmoke;
+  color: #ccc;
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
   font-size: 14px;
   line-height: 1.5;
   padding: 5px;
+  border-radius: 1em;
 }
 
-/* optional class for removing the outline */
 textarea:focus-visible {
   outline: none !important;
 }
@@ -153,10 +170,12 @@ textarea:focus-visible {
   min-height: 400px;
   white-space: pre;
   text-align: start;
+  border-radius: 1em;
 }
 
 #render {
   background: #eee;
+  padding: 1em;
 }
 
 span.whitespace {
@@ -168,6 +187,33 @@ label {
 }
 
 .buttons {
-  margin-top: 100px;
+  margin-top: 10px;
+  color: white;
+}
+
+.buttons .vs-button {
+  margin: 0px 5px;
+  font-size: 2em;
+  position: relative;
+  float: right;
+  outline: none;
+}
+
+.buttons .vs-switch {
+  margin: 0px 5px;
+  width: 18vw;
+  position: relative;
+  float: left;
+  height: 2em;
+  font-size: 1em;
+}
+.vs-switch .vs-switch__circle {
+  background-color:rgb(178, 195, 197);
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.vs-switch .vs-switch__text {
+  font-size: 1em;
 }
 </style>
