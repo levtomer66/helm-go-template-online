@@ -31,10 +31,6 @@
             primary
             color="#7d33ff"
           >
-            <template #circle>
-                <i v-if="!active5" class='bx bxs-moon' ></i>
-                <i v-else class='bx bxs-sun' ></i>
-            </template>
             I'm debugging Helm
           </vs-switch>
           <vs-button
@@ -58,7 +54,6 @@
         </div>
         <div class="col-md-12">
           <h1>Render</h1>
-          <!-- <div id="render" v-html="renderData"> -->
             <PrismEditor
               class="my-editor"
               id="render"
@@ -66,7 +61,6 @@
               :highlight="highlighterYml"
               line-numbers
             ></PrismEditor>
-          <!-- </div> -->
         </div>
       </div>
     </form>
