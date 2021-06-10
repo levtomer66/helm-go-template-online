@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <vs-tooltip shadow>
-      <a href="https://meteorops.com">
+      <a href="https://meteorops.com" target="_blank">
         <div class="company-logo">
           <img src="./assets/MeteorOps.png" />
         </div>

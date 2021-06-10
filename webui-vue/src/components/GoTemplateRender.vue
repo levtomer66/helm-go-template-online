@@ -147,7 +147,7 @@ export default {
           return response.text();
         })
         .then((data) => {
-          this.renderData = `<pre>${data}</pre>`
+          this.renderData = data
           this.renderLoading = false;
           });
     },
