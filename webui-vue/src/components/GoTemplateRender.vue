@@ -25,14 +25,29 @@
       </div>
       <div class="row">
         <div class="col-md-12 buttons">
-          <vs-switch 
-            val="I'm debugging Helm" 
-            v-model="helmEnabled"
-            primary
-            color="#7d33ff"
-          >
-            I'm debugging Helm
-          </vs-switch>
+          <vs-tooltip
+            bottom
+            color="#7d33ff">
+            <vs-switch 
+              val="I'm debugging Helm" 
+              v-model="helmEnabled"
+              primary
+              color="#7d33ff"
+            >
+              I'm debugging Helm
+            </vs-switch>
+            <template #tooltip>
+              <div class="content-tooltip">
+                <h4>
+                  What does it mean?
+                </h4>
+                <p>
+                  When debugging Helm charts you will have the '.Values' prefix with your values.
+                  Toggling this will save you adding 'Values' to the top of the yaml here.
+                </p>
+              </div>
+            </template>
+          </vs-tooltip>
           <vs-button
             type="button"
             gradient
@@ -43,6 +58,7 @@
             Clear
           </vs-button>
           <vs-button
+            :loading="renderLoading"
             type="button"
             gradient
             size="xl"
@@ -87,6 +103,7 @@ export default {
     return {
       values: "myval: 5",
       template: "{{ .myval }}",
+      renderLoading: false,
       renderData: "",
       helmEnabled: false,
     };
@@ -108,8 +125,7 @@ export default {
     },
 
     render() {
-      console.log(this.values);
-      console.log(this.template);
+      this.renderLoading = true;
       let myval = this.yamlToJson(this.values);
       if (this.helmEnabled) {
         myval = { Values: myval };
@@ -125,12 +141,15 @@ export default {
       fetch("/render", requestOptions)
         .then((response) => {
           if (!response.ok) {
+            this.renderLoading = false;
             return response.text();
-            // throw new Error("Network response was not ok");
           }
           return response.text();
         })
-        .then((data) => (this.renderData = data));
+        .then((data) => {
+          this.renderData = `<pre>${data}</pre>`
+          this.renderLoading = false;
+          });
     },
     clear() {
       this.renderData = "";
@@ -209,5 +228,9 @@ label {
 
 .vs-switch .vs-switch__text {
   font-size: 1em;
+}
+
+.vs-tooltip-content {
+  position: absolute;
 }
 </style>
