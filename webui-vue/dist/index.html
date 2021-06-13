@@ -1,1 +1,32 @@
-<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><title>GoTemplate Online Parser</title><link href="/css/app.86e53ea3.css" rel="preload" as="style"><link href="/css/chunk-vendors.b4bbd2f2.css" rel="preload" as="style"><link href="/js/app.08d19afc.js" rel="preload" as="script"><link href="/js/chunk-vendors.2321c0ca.js" rel="preload" as="script"><link href="/css/chunk-vendors.b4bbd2f2.css" rel="stylesheet"><link href="/css/app.86e53ea3.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but go-template-online doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/js/chunk-vendors.2321c0ca.js"></script><script src="/js/app.08d19afc.js"></script></body></html>
+Html Webpack Plugin:
+<pre>
+  Error: Parse Error: <meta property=”og:type" content=”product”/>
+      <meta property=”og:description" content="Easily debug Go templates onl  ine”/>
+      <meta property=”og:image" content="/meteorops_social_thumbnail.jpg" />      <meta property=”og:site_name” content="GoTemplateDebugger"/>
+      <link rel="icon" href="/favicon.ico">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootst  rap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9  JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>GoTemplate Online Parser</title>
+    <link href="/css/app.156be057.css" rel="preload" as="style"><link href="  /css/chunk-vendors.b4bbd2f2.css" rel="preload" as="style"><link href="/js/  app.d9185b13.js" rel="preload" as="script"><link href="/js/chunk-vendors.5  5fdad0b.js" rel="preload" as="script"><link href="/css/chunk-vendors.b4bbd  2f2.css" rel="stylesheet"><link href="/css/app.156be057.css" rel="styleshe  et"></head>
+    <body>
+      <noscript>
+        <strong>We're sorry but go-template-online doesn't work properly wit  hout JavaScript enabled. Please enable it to continue.</strong>
+      </noscript>
+      <div id="app"></div>
+      <!-- built files will be auto injected -->
+    <script type="text/javascript" src="/js/chunk-vendors.55fdad0b.js"></scr  ipt><script type="text/javascript" src="/js/app.d9185b13.js"></script></bo  dy>
+  </html>
+  
+  - htmlparser.js:240 new HTMLParser
+    [webui-vue]/[html-minifier]/src/htmlparser.js:240:13
+  
+  - htmlminifier.js:966 minify
+    [webui-vue]/[html-minifier]/src/htmlminifier.js:966:3
+  
+  - htmlminifier.js:1326 exports.minify
+    [webui-vue]/[html-minifier]/src/htmlminifier.js:1326:16
+  
+  - index.js:316 
+    [webui-vue]/[html-webpack-plugin]/index.js:316:18
+  
+</pre>

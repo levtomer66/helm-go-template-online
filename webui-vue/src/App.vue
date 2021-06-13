@@ -19,7 +19,7 @@
 </template>
 
 <script>
-
+import 'boxicons'
 import GoTemplateRender from './components/GoTemplateRender.vue'
 
 export default {
@@ -33,6 +33,15 @@ export default {
 <style>
 body {
   background-color: #0d1c24;
+}
+.social-buttons {
+  float: right;
+  margin-top: 20vh;
+}
+
+.social-buttons .vs-button {
+  width: 50px;
+  height: 50px;
 }
 
 .product-logo img {
