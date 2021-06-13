@@ -5,7 +5,7 @@
         <div class="col-md-6">
           <h1>Template</h1>
           <PrismEditor
-            class="my-editor"
+            class="code-editor"
             id="template"
             v-model="template"
             :highlight="highlighterGo"
@@ -15,7 +15,7 @@
         <div class="col-md-6">
           <h1>Values (Yaml)</h1>
           <PrismEditor
-            class="my-editor"
+            class="code-editor"
             id="values"
             v-model="values"
             :highlight="highlighterYml"
@@ -71,10 +71,9 @@
         <div class="col-md-12">
           <h1>Render</h1>
             <PrismEditor
-              class="my-editor"
+              class="code-editor rendered-data"
               id="render"
               v-html="renderData"
-              v-model="renderData"
               :highlight="highlighterYml"
               line-numbers
             ></PrismEditor>
@@ -163,12 +162,11 @@ export default {
   height: auto;
 }
 
-.my-editor {
+.code-editor {
   background: whitesmoke;
   color: #ccc;
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
   font-size: 14px;
-  /* line-height: 1.5; */
   padding: 5px;
   border-radius: 1em;
 }
@@ -233,5 +231,9 @@ label {
 
 .vs-tooltip-content {
   position: absolute;
+}
+
+.rendered-data {
+  color: black;
 }
 </style>
