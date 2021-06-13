@@ -73,6 +73,7 @@
             <PrismEditor
               class="my-editor"
               id="render"
+              v-html="renderData"
               v-model="renderData"
               :highlight="highlighterYml"
               line-numbers
@@ -167,7 +168,7 @@ export default {
   color: #ccc;
   font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
   font-size: 14px;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   padding: 5px;
   border-radius: 1em;
 }
