@@ -23,6 +23,8 @@ func getFunctions() template.FuncMap {
 		"fromYaml": chartutil.FromYaml,
 		"toJson":   chartutil.ToJson,
 		"fromJson": chartutil.FromJson,
+		"toUpper":  strings.ToUpper,
+		"toLower":  strings.ToLower,
 	}
 
 	for k, v := range extra {
