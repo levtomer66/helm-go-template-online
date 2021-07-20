@@ -1,5 +1,5 @@
 # Go Template Online Parser
-https://gotplonline.herokuapp.com/
+https://go-template-debugger.herokuapp.com/
 
 # Description
 GoTemplate online parser + helm parser online to make it easier to debug go-templates and helm templates

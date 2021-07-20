@@ -134,7 +134,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          template: JSON.stringify(this.template),
+          template: this.template,
           values: JSON.stringify(myval),
         }),
       };

@@ -85,7 +85,8 @@ func render(w http.ResponseWriter, req *http.Request) {
 func determineListenAddress() (string, error) {
 	port := os.Getenv("PORT")
 	if port == "" {
-		return "", fmt.Errorf("$PORT not set")
+		port = "13373"
+		// return "", fmt.Errorf("$PORT not set")
 	}
 	return ":" + port, nil
 }
