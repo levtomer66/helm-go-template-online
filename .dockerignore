@@ -1,4 +1,3 @@
-webui-vue/**
-!webui-vue/dist
 .git
 Dockerfile
+gotplonline
