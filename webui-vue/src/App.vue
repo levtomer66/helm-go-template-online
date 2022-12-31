@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <vs-tooltip shadow>
-      <a href="https://meteorops.com" target="_blank">
+      <a href="https://lusha.com" target="_blank">
         <div class="company-logo">
-          <img src="./assets/MeteorOps.png" />
+          <img src="./assets/lusha.svg" />
         </div>
       </a>
       <template #tooltip>
-        Made with ♥ by MeteorOps
+        Made by Lusha
       </template>
     </vs-tooltip>
     <div class="product-logo">
-      <img src="./assets/GoTemplateDebugger.png" />
+      <img src="./assets/lusha.svg" />
     </div>
     <GoTemplateRender />
     

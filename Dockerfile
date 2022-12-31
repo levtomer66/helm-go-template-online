@@ -1,7 +1,7 @@
 FROM golang:1.16.3-alpine
 
 # Set the Current Working Directory inside the container
-WORKDIR $GOPATH/src/github.com/meteorops/go-template-online
+WORKDIR $GOPATH/src/github.com/lusha/go-template-online
 
 # Copy everything from the current directory to the PWD (Present Working Directory) inside the container
 COPY main.go .
