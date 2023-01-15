@@ -1,5 +1,5 @@
 # Go Template Online Parser
-https://go-template-debugger.herokuapp.com/
+https://helm-go-template-online-production.up.railway.app/
 
 # Description
 GoTemplate online parser + helm parser online to make it easier to debug go-templates and helm templates
@@ -23,12 +23,5 @@ or
 go run main.go
 ```
 
-# Deploy Heroku
-```bash
-heroku container:login
-git add -A
-git commit -m "" -a
-git push heroku main
-```
 
 
